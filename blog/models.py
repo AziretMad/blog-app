@@ -4,6 +4,13 @@ from django.contrib.auth.models import User
 from django.utils.translation import gettext as _
 
 
+class PublishedManager(models.Manager):
+    def get_queryset(self):
+        return super(
+            PublishedManager, self
+        ).get_queryset().filter(status=Post.PUBLISHED)
+
+
 class Post(models.Model):
     DRAFT = 'draft'
     PUBLISHED = 'published'
@@ -28,6 +35,8 @@ class Post(models.Model):
     status = models.CharField(
         _('Статус'), max_length=10, choices=STATUS_CHOICES, default=DRAFT
     )
+    objects = models.Manager()
+    published = PublishedManager()
 
     class Meta:
         ordering = ('-publish',)
