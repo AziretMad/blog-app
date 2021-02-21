@@ -1,0 +1,19 @@
+{% load static %}
+{% load i18n %}
+<!doctype html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static "css/blog.css" %}">
+</head>
+<body>
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <div id="sidebar">
+        <h2>{% trans "Мой блог" %}</h2>
+            <p>{% trans "Это мой блог." %}</p>
+    </div>
+</body>
+</html>
